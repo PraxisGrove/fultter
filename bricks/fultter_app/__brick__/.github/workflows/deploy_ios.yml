@@ -1,0 +1,34 @@
+{{=<% %>=}}
+name: Deploy iOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build iOS without codesign
+        run: flutter build ipa --release --no-codesign --dart-define-from-file=config/prod.json
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-prod-ipa
+          path: build/ios/ipa/*.ipa
+
+      # Replace this artifact-only step with a signed build and App Store Connect
+      # upload after configuring certificates and provisioning profiles.

@@ -1,0 +1,48 @@
+name: fultter_app
+description: A mobile-first Flutter app scaffold with logging, observability, basic security, routing, networking, CI, and release workflow templates.
+version: 0.1.0
+
+environment:
+  mason: ">=0.1.0-dev.57 <0.2.0"
+
+vars:
+  app_name:
+    type: string
+    description: Dart package and Flutter project name.
+    default: my_app
+    prompt: What is the Dart package name?
+  app_display_name:
+    type: string
+    description: User-visible application name.
+    default: My App
+    prompt: What is the app display name?
+  bundle_id:
+    type: string
+    description: Android applicationId and iOS bundle identifier.
+    default: com.example.myapp
+    prompt: What is the bundle identifier?
+  org_domain:
+    type: string
+    description: Organization domain passed to flutter create.
+    default: com.example
+    prompt: What organization domain should flutter create use?
+  description:
+    type: string
+    description: pubspec description.
+    default: A new Flutter mobile app.
+    prompt: What is the project description?
+  use_sentry:
+    type: boolean
+    description: Include Sentry observability integration.
+    default: true
+    prompt: Include Sentry observability?
+  run_pub_get:
+    type: boolean
+    description: Run flutter pub get after generation.
+    default: true
+    prompt: Run flutter pub get after generation?
+  run_tests_after_generate:
+    type: boolean
+    description: Run flutter test after generation.
+    default: false
+    prompt: Run flutter test after generation?

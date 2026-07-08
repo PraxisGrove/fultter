@@ -1,0 +1,7 @@
+{
+  "APP_ENV": "dev",
+  "API_BASE_URL": "https://api-dev.example.com",
+  "SENTRY_DSN": "",
+  "ENABLE_NETWORK_LOGS": true,
+  "ALLOW_INSECURE_HTTP_FOR_DEBUG": false
+}

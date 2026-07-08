@@ -1,0 +1,8 @@
+name: fultter_app_hooks
+publish_to: "none"
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  mason: ^0.1.2

@@ -1,0 +1,6 @@
+.mason/
+.dart_tool/
+build/
+.tools/
+bricks/**/hooks/build/
+.DS_Store

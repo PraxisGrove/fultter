@@ -1,0 +1,64 @@
+import 'package:flutter/foundation.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
+
+import '../config/app_config.dart';
+import 'observability.dart';
+
+class SentryObservability implements Observability {
+  SentryObservability(this._config);
+
+  final AppConfig _config;
+
+  @override
+  Future<void> init() async {
+    if (_config.sentryDsn.isEmpty) {
+      return;
+    }
+
+    await SentryFlutter.init((options) {
+      options.dsn = _config.sentryDsn;
+      options.environment = _config.environment.name;
+      options.tracesSampleRate = _config.environment.name == 'prod' ? 0.2 : 1.0;
+      options.sendDefaultPii = false;
+      options.attachStacktrace = true;
+    });
+  }
+
+  @override
+  void addBreadcrumb({
+    required String message,
+    required String category,
+    required String level,
+  }) {
+    Sentry.addBreadcrumb(
+      Breadcrumb(
+        message: message,
+        category: category,
+        level: _sentryLevel(level),
+      ),
+    );
+  }
+
+  @override
+  void captureFlutterError(FlutterErrorDetails details) {
+    Sentry.captureException(
+      details.exception,
+      stackTrace: details.stack,
+    );
+  }
+
+  @override
+  void captureException(Object error, StackTrace? stackTrace) {
+    Sentry.captureException(error, stackTrace: stackTrace);
+  }
+
+  SentryLevel _sentryLevel(String level) {
+    return switch (level) {
+      'SHOUT' || 'SEVERE' => SentryLevel.error,
+      'WARNING' => SentryLevel.warning,
+      'INFO' => SentryLevel.info,
+      'CONFIG' || 'FINE' || 'FINER' || 'FINEST' => SentryLevel.debug,
+      _ => SentryLevel.info,
+    };
+  }
+}
