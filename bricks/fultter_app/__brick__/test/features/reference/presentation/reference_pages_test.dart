@@ -270,7 +270,10 @@ Future<void> _pumpReferenceApp(
 }
 
 typedef _FetchPage =
-    Future<ReferencePage> Function({required int page, required int pageSize});
+    Future<ReferencePage> Function({
+      required int page,
+      required int pageSize,
+    });
 
 final class _TestRepository implements ReferenceRepository {
   _TestRepository({
