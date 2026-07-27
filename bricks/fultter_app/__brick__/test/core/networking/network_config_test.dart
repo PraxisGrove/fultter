@@ -29,4 +29,31 @@ void main() {
 
     expect(networkConfig.enableNetworkLogs, isTrue);
   });
+
+  test('only development may explicitly allow insecure HTTP', () {
+    for (final environment in [AppEnvironment.staging, AppEnvironment.prod]) {
+      final appConfig = AppConfig(
+        environment: environment,
+        apiBaseUrl: 'http://api.example.com',
+        enableNetworkLogs: false,
+        allowInsecureHttpForDebug: true,
+      );
+
+      expect(
+        NetworkConfig.fromAppConfig(appConfig).allowInsecureHttpForDebug,
+        isFalse,
+      );
+    }
+
+    const development = AppConfig(
+      environment: AppEnvironment.dev,
+      apiBaseUrl: 'http://localhost:8080',
+      enableNetworkLogs: false,
+      allowInsecureHttpForDebug: true,
+    );
+    expect(
+      NetworkConfig.fromAppConfig(development).allowInsecureHttpForDebug,
+      isTrue,
+    );
+  });
 }
