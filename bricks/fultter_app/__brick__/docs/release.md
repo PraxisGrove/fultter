@@ -2,6 +2,10 @@
 
 CI quality checks run on push and pull request. Release and deployment workflows are generated as manual workflows.
 
+All generated workflows pin Flutter 3.44.8. Update the pin only after the
+generator repository's Android and macOS iOS quality gates pass on the new
+Flutter patch release.
+
 ## GitHub Secrets
 
 The generated workflows contain secret references only. Credential values,
