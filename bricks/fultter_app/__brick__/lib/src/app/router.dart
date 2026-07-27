@@ -151,10 +151,7 @@ class AuthLoadingPage extends StatelessWidget {
 }
 
 class EntryPage extends StatelessWidget {
-  const EntryPage({
-    required this.sessionExpired,
-    super.key,
-  });
+  const EntryPage({required this.sessionExpired, super.key});
 
   final bool sessionExpired;
 
@@ -192,10 +189,7 @@ class PublicPage extends StatelessWidget {
 }
 
 class ProtectedDetailPage extends StatelessWidget {
-  const ProtectedDetailPage({
-    required this.section,
-    super.key,
-  });
+  const ProtectedDetailPage({required this.section, super.key});
 
   final String section;
 
@@ -245,9 +239,7 @@ class HomePage extends ConsumerWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Text(localizations.homeReady),
-      ),
+      body: Center(child: Text(localizations.homeReady)),
     );
   }
 }

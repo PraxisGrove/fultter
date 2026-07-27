@@ -75,7 +75,7 @@ class Redactor {
             : values.map(redact).toList(growable: false),
       );
     });
-    return redact(uri.replace(queryParameters: queryParameters));
+    return uri.replace(queryParameters: queryParameters).toString();
   }
 
   static bool _isSensitiveKey(String key) {

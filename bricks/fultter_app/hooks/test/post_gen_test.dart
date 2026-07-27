@@ -110,6 +110,9 @@ void main() {
     addTearDown(() => directory.delete(recursive: true));
     final readme = File('${directory.path}/README.md')
       ..writeAsStringSync('template content');
+    final workflow = File('${directory.path}/.github/workflows/flutter_ci.yml')
+      ..createSync(recursive: true)
+      ..writeAsStringSync('template workflow');
     final recorded = _RecordedOutput();
     final commands = <String>[];
 
@@ -123,6 +126,7 @@ void main() {
         commands.add('$executable ${arguments.join(' ')}');
         if (executable == 'flutter' && arguments.first == 'create') {
           readme.writeAsStringSync('flutter content');
+          workflow.writeAsStringSync('flutter workflow');
           _writeGeneratedFile(
             directory,
             'android/app/build.gradle.kts',
@@ -154,6 +158,7 @@ void main() {
     );
 
     expect(readme.readAsStringSync(), 'template content');
+    expect(workflow.readAsStringSync(), 'template workflow');
     expect(
       File('${directory.path}/android/app/build.gradle.kts').readAsStringSync(),
       contains('com.acme.product'),

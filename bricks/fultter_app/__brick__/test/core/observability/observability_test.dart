@@ -40,14 +40,13 @@ void main() {
       category: 'auth token=category-secret',
       level: 'WARNING',
     );
-    observability.captureException({
+    const exception = {
       'password': 'password-secret',
-      'nested': {
-        'apiKey': 'api-secret',
-      },
-    }, null);
+      'nested': {'apiKey': 'api-secret'},
+    };
+    observability.captureException(exception, null);
     observability.captureFlutterError(
-      FlutterErrorDetails(exception: 'token=flutter-secret'),
+      const FlutterErrorDetails(exception: 'token=flutter-secret'),
     );
 
     expect(provider.initialized, isTrue);
