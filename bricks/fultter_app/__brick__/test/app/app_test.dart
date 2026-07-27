@@ -14,9 +14,7 @@ import 'package:{{app_name}}/src/features/auth/presentation/auth_controller.dart
 void main() {
   testWidgets('supports system, light, and dark theme modes', (tester) async {
     tester.platformDispatcher.platformBrightnessTestValue = Brightness.light;
-    addTearDown(
-      tester.platformDispatcher.clearPlatformBrightnessTestValue,
-    );
+    addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
     final container = await _pumpApp(tester);
 
     for (final mode in ThemeMode.values) {
@@ -51,25 +49,22 @@ void main() {
     tester,
   ) async {
     final container = await _pumpApp(tester);
-    expect(find.text('Ready.'), findsOneWidget);
+    expect(find.text('References'), findsOneWidget);
 
-    container
-        .read(localeProvider.notifier)
-        .setLocale(const Locale('zh', 'CN'));
+    container.read(localeProvider.notifier).setLocale(const Locale('zh', 'CN'));
     await tester.pumpAndSettle();
 
-    expect(find.text('准备就绪。'), findsOneWidget);
+    expect(find.text('参考项目'), findsOneWidget);
     expect(find.byTooltip('选择主题'), findsOneWidget);
   });
 
-  testWidgets(
-    'falls back to English for an unsupported locale',
-    (tester) async {
-      await _pumpApp(tester, locale: const Locale('fr'));
+  testWidgets('falls back to English for an unsupported locale', (
+    tester,
+  ) async {
+    await _pumpApp(tester, locale: const Locale('fr'));
 
-      expect(find.text('Ready.'), findsOneWidget);
-    },
-  );
+    expect(find.text('References'), findsOneWidget);
+  });
 
   testWidgets('reference controls do not clip at 200 percent text scale', (
     tester,
@@ -79,9 +74,7 @@ void main() {
     tester.platformDispatcher.textScaleFactorTestValue = 2;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-    addTearDown(
-      tester.platformDispatcher.clearTextScaleFactorTestValue,
-    );
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
 
     await _pumpApp(tester);
     await tester.tap(find.byTooltip('Choose theme'));
@@ -185,10 +178,7 @@ Future<ProviderContainer> _pumpApp(
   }
 
   await tester.pumpWidget(
-    UncontrolledProviderScope(
-      container: container,
-      child: const App(),
-    ),
+    UncontrolledProviderScope(container: container, child: const App()),
   );
   await tester.pumpAndSettle();
   return container;
