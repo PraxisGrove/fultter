@@ -21,12 +21,22 @@ Not included by default:
 
 ## Redaction
 
-Sensitive fields are redacted before logs are written or sent as observability breadcrumbs:
+Sensitive fields are recursively redacted before console output or provider
+delivery. URL query parameters and nested map/list values use the same rules:
 
 - `authorization`
 - `cookie`
 - `password`
+- `passcode`
 - `token`
+- `access_token` / `accessToken`
+- `refresh_token` / `refreshToken`
+- `api_key` / `apiKey`
 - `x-api-key`
+- `client_secret` / `clientSecret`
 
 Extend `Redactor` if your backend uses additional sensitive field names.
+
+Network request and response bodies are never logged by the generated client.
+Network metadata logs can be enabled for dev or staging, but are forced off in
+production even if `ENABLE_NETWORK_LOGS` is set to `true`.

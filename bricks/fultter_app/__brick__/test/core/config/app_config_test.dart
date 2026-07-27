@@ -8,7 +8,7 @@ void main() {
 
     expect(config.environment, AppEnvironment.dev);
     expect(config.apiBaseUrl, startsWith('https://'));
-    expect(config.enableNetworkLogs, isTrue);
+    expect(config.enableNetworkLogs, isFalse);
     expect(config.allowInsecureHttpForDebug, isFalse);
   });
 }

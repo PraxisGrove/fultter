@@ -3,7 +3,7 @@
 Generates a Flutter mobile app skeleton with infrastructure defaults:
 
 - logging with Dart `logging`
-- observability via Sentry
+- no-op observability by default, with Sentry as an opt-in integration
 - dependency wiring with Riverpod
 - networking with Dio
 - routing with go_router

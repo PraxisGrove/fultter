@@ -10,7 +10,7 @@ class NetworkConfig {
   factory NetworkConfig.fromAppConfig(AppConfig config) {
     return NetworkConfig(
       baseUrl: config.apiBaseUrl,
-      enableNetworkLogs: config.enableNetworkLogs,
+      enableNetworkLogs: config.enableNetworkLogs && config.isDebugLike,
       allowInsecureHttpForDebug: config.allowInsecureHttpForDebug,
     );
   }

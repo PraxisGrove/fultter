@@ -14,7 +14,7 @@ Future<void> bootstrap() async {
   final observability = createObservability(config);
 
   configureLogging(
-    enableConsoleLogs: config.enableNetworkLogs || config.isDebugLike,
+    enableConsoleLogs: config.isDebugLike,
     observability: observability,
   );
 

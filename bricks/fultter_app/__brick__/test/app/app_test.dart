@@ -15,7 +15,6 @@ void main() {
             const AppConfig(
               environment: AppEnvironment.dev,
               apiBaseUrl: 'https://api.example.com',
-              sentryDsn: '',
               enableNetworkLogs: true,
               allowInsecureHttpForDebug: false,
             ),

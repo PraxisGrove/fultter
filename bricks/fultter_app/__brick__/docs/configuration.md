@@ -27,11 +27,17 @@ These files are for client configuration only:
 
 - `APP_ENV`
 - `API_BASE_URL`
-- `SENTRY_DSN`
+{{#use_sentry}}- `SENTRY_DSN`{{/use_sentry}}
 - `ENABLE_NETWORK_LOGS`
 - `ALLOW_INSECURE_HTTP_FOR_DEBUG`
 
-Do not put server secrets, private keys, database passwords, admin tokens, or signing credentials in these files.
+Every value packaged with a client application is public and recoverable from
+the built app. Do not put server secrets, private keys, database passwords,
+admin tokens, or signing credentials in these files. Provider client settings,
+including a Sentry DSN when enabled, must not be described or treated as secret.
+
+Network bodies are not logged. `ENABLE_NETWORK_LOGS` controls redacted request
+metadata only and is always overridden to `false` for `APP_ENV=prod`.
 
 ## Platform Flavors
 
