@@ -1,0 +1,8 @@
+{
+  "@@locale": "en",
+  "homeReady": "Ready.",
+  "themeMenuTooltip": "Choose theme",
+  "themeSystem": "System theme",
+  "themeLight": "Light theme",
+  "themeDark": "Dark theme"
+}

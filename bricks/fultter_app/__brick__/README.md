@@ -20,6 +20,7 @@ flutter test
 
 - [Architecture](docs/architecture.md)
 - [Configuration](docs/configuration.md)
+- [Localization](docs/localization.md)
 - [Observability](docs/observability.md)
 - [Security](docs/security.md)
 - [Release](docs/release.md)
