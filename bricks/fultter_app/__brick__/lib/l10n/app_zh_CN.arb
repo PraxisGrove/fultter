@@ -1,6 +1,10 @@
 {
   "@@locale": "zh_CN",
   "homeReady": "准备就绪。",
+  "authLoading": "正在检查会话",
+  "authRequired": "需要登录后才能继续。",
+  "authSessionExpired": "会话已过期，请重新登录后继续。",
+  "publicReady": "公共路由已就绪。",
   "themeMenuTooltip": "选择主题",
   "themeSystem": "跟随系统",
   "themeLight": "浅色主题",

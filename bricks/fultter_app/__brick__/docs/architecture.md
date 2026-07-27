@@ -19,6 +19,7 @@ lib/
       observability/
       security/
     features/
+      auth/
 ```
 
 ## Boundaries
@@ -39,3 +40,7 @@ Riverpod is used for dependency wiring. Infrastructure services are provided fro
 `apiClientProvider` and `failureMapperProvider` expose replaceable interfaces.
 Override providers at the nearest `ProviderScope`; do not add a mutable global
 service locator.
+
+`authCredentialStoreProvider` keeps credential persistence replaceable, while
+`authControllerProvider` owns backend-neutral session state. See
+`docs/authentication.md` for the state and routing contracts.
