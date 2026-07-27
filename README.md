@@ -32,6 +32,7 @@ app_name: my_app
 app_display_name: My App
 bundle_id: com.example.myapp
 org_domain: com.example
+use_sentry: false
 ```
 
 The brick generates app code first, then its post-generation hook runs `flutter create` to create Android/iOS platform folders from your local Flutter SDK.
@@ -41,7 +42,7 @@ The brick generates app code first, then its post-generation hook runs `flutter 
 This template intentionally focuses on infrastructure:
 
 - Dart `logging` abstraction
-- Sentry observability, behind a small interface
+- no-op observability by default, with optional Sentry integration behind a small interface
 - Riverpod dependency wiring
 - Dio networking
 - basic security: redaction, secure storage, HTTPS guardrails

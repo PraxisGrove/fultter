@@ -4,6 +4,11 @@ CI quality checks run on push and pull request. Release and deployment workflows
 
 ## GitHub Secrets
 
+The generated workflows contain secret references only. Credential values,
+keystores, certificates, provisioning profiles, and private keys must remain in
+the repository's encrypted secret store and must never be committed to config or
+workflow files.
+
 Android signing:
 
 ```txt

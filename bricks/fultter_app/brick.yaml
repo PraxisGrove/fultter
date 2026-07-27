@@ -34,7 +34,7 @@ vars:
   use_sentry:
     type: boolean
     description: Include Sentry observability integration.
-    default: true
+    default: false
     prompt: Include Sentry observability?
   run_pub_get:
     type: boolean

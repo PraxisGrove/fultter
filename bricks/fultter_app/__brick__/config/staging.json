@@ -1,7 +1,7 @@
 {
   "APP_ENV": "staging",
   "API_BASE_URL": "https://api-staging.example.com",
-  "SENTRY_DSN": "",
+  {{#use_sentry}}"SENTRY_DSN": "",{{/use_sentry}}
   "ENABLE_NETWORK_LOGS": true,
   "ALLOW_INSECURE_HTTP_FOR_DEBUG": false
 }

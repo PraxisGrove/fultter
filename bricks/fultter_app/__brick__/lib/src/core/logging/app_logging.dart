@@ -12,32 +12,34 @@ void configureLogging({
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) {
     final redactedMessage = Redactor.redact(record.message);
-    final formatted = _format(record, redactedMessage);
+    final redactedError = Redactor.redactObject(record.error);
+    final redactedLoggerName = Redactor.redact(record.loggerName);
+    final formatted = _format(record, redactedLoggerName, redactedMessage);
 
     if (enableConsoleLogs) {
       developer.log(
         formatted,
-        name: record.loggerName,
+        name: redactedLoggerName,
         level: record.level.value,
-        error: record.error,
+        error: redactedError,
         stackTrace: record.stackTrace,
       );
     }
 
     observability.addBreadcrumb(
       message: redactedMessage,
-      category: record.loggerName,
+      category: redactedLoggerName,
       level: record.level.name,
     );
 
     if (record.level >= Level.SEVERE) {
-      final error = record.error ?? redactedMessage;
+      final error = redactedError ?? redactedMessage;
       observability.captureException(error, record.stackTrace);
     }
   });
 }
 
-String _format(LogRecord record, String message) {
+String _format(LogRecord record, String loggerName, String message) {
   return '[${record.level.name}] ${record.time.toIso8601String()} '
-      '${record.loggerName}: $message';
+      '$loggerName: $message';
 }

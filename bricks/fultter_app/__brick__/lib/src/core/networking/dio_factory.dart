@@ -30,15 +30,16 @@ Dio createDio(NetworkConfig config, Observability observability) {
   dio.interceptors.add(
     InterceptorsWrapper(
       onRequest: (options, handler) {
+        final safeUri = Redactor.redactUri(options.uri);
         observability.addBreadcrumb(
-          message: '${options.method} ${options.uri}',
+          message: '${options.method} $safeUri',
           category: 'http',
           level: 'INFO',
         );
 
         if (config.enableNetworkLogs) {
           _log.info(
-            'HTTP ${options.method} ${options.uri} '
+            'HTTP ${options.method} $safeUri '
             'headers=${Redactor.redactMap(options.headers)}',
           );
         }
@@ -46,9 +47,10 @@ Dio createDio(NetworkConfig config, Observability observability) {
         handler.next(options);
       },
       onError: (error, handler) {
+        final safeUri = Redactor.redactUri(error.requestOptions.uri);
         _log.warning(
           'HTTP error ${error.requestOptions.method} '
-          '${error.requestOptions.uri}: ${Redactor.redact(error.message)}',
+          '$safeUri: ${Redactor.redact(error.message)}',
           error,
           error.stackTrace,
         );
