@@ -59,10 +59,7 @@ void main() {
       Uri.parse(redirect).queryParameters['from'],
       '/protected/orders?tab=open',
     );
-    expect(
-      redirector.redirect(AuthState.loading, Uri.parse(redirect)),
-      isNull,
-    );
+    expect(redirector.redirect(AuthState.loading, Uri.parse(redirect)), isNull);
   });
 
   test('public navigation remains available in every auth state', () {
@@ -96,10 +93,7 @@ void main() {
     final uri = Uri.parse(redirect!);
     expect(uri.path, AppRoutes.entry);
     expect(uri.queryParameters['from'], '/protected/orders?tab=open');
-    expect(
-      redirector.redirect(AuthState.unauthenticated, uri),
-      isNull,
-    );
+    expect(redirector.redirect(AuthState.unauthenticated, uri), isNull);
   });
 
   test('authenticated entry navigation returns to the protected target', () {
@@ -119,10 +113,7 @@ void main() {
 
   test('authenticated entry navigation defaults to protected home', () {
     expect(
-      redirector.redirect(
-        AuthState.authenticated,
-        Uri.parse(AppRoutes.entry),
-      ),
+      redirector.redirect(AuthState.authenticated, Uri.parse(AppRoutes.entry)),
       AppRoutes.protectedHome,
     );
   });

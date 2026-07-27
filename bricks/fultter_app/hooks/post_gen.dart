@@ -224,9 +224,11 @@ Future<void> _restoreTemplateFiles(
     final destinationPath = _join(root, path);
     final destinationType = FileSystemEntity.typeSync(destinationPath);
     if (destinationType != FileSystemEntityType.notFound) {
-      await FileSystemEntity.isFile(destinationPath)
-          ? File(destinationPath).delete()
-          : Directory(destinationPath).delete(recursive: true);
+      if (await FileSystemEntity.isFile(destinationPath)) {
+        await File(destinationPath).delete();
+      } else {
+        await Directory(destinationPath).delete(recursive: true);
+      }
     }
 
     await _copyEntity(

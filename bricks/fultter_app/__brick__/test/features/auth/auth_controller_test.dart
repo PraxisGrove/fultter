@@ -85,9 +85,7 @@ void main() {
     addTearDown(controller.dispose);
     await controller.initialize();
 
-    final authentication = controller.authenticate(
-      const AuthCredential('new'),
-    );
+    final authentication = controller.authenticate(const AuthCredential('new'));
     final expiry = controller.expireSession();
     await Future<void>.delayed(Duration.zero);
 
@@ -104,10 +102,7 @@ void main() {
 }
 
 class _MemoryCredentialStore implements AuthCredentialStore {
-  _MemoryCredentialStore({
-    this.credential,
-    this.failRead = false,
-  });
+  _MemoryCredentialStore({this.credential, this.failRead = false});
 
   AuthCredential? credential;
   final bool failRead;

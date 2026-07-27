@@ -6,10 +6,7 @@ import 'package:{{app_name}}/src/features/auth/domain/auth.dart';
 void main() {
   test('reads, writes, and clears through SecureStorage', () async {
     final storage = _MemorySecureStorage();
-    final store = SecureAuthCredentialStore(
-      storage,
-      storageKey: 'test_auth',
-    );
+    final store = SecureAuthCredentialStore(storage, storageKey: 'test_auth');
 
     expect(await store.read(), isNull);
 

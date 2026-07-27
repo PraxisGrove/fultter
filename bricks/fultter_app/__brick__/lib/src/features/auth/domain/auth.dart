@@ -1,9 +1,4 @@
-enum AuthState {
-  loading,
-  unauthenticated,
-  authenticated,
-  sessionExpired,
-}
+enum AuthState { loading, unauthenticated, authenticated, sessionExpired }
 
 final class AuthCredential {
   const AuthCredential(this.value);
