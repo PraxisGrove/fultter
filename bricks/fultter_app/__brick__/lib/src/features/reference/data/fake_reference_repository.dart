@@ -8,7 +8,7 @@ enum FakeReferenceState { success, empty, failure }
 
 final class FakeReferenceRepository implements ReferenceRepository {
   FakeReferenceRepository({Iterable<ReferenceItem>? seed})
-    : _seed = _deduplicate(seed ?? defaultReferenceItems) {
+      : _seed = _deduplicate(seed ?? defaultReferenceItems) {
     reset();
   }
 

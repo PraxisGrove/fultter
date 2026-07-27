@@ -66,12 +66,12 @@ void main() {
     for (final operation in <Future<Object> Function()>[
       () => repository.fetchById('missing'),
       () => repository.save(
-        const ReferenceItemEdit(
-          id: 'missing',
-          title: 'Missing',
-          description: 'Missing',
-        ),
-      ),
+            const ReferenceItemEdit(
+              id: 'missing',
+              title: 'Missing',
+              description: 'Missing',
+            ),
+          ),
     ]) {
       await expectLater(
         operation(),
