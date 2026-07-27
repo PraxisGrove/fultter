@@ -37,6 +37,10 @@ use_sentry: false
 
 The brick generates app code first, then its post-generation hook runs `flutter create` to create Android/iOS platform folders from your local Flutter SDK.
 
+Generation validates `app_name`, `org_domain`, and `bundle_id` before invoking
+Flutter. See `bricks/fultter_app/README.md` for the accepted formats and the
+exact dev, staging, prod, analysis, and test commands printed after success.
+
 ## Scope
 
 This template intentionally focuses on infrastructure:

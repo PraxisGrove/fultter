@@ -6,3 +6,6 @@ environment:
 
 dependencies:
   mason: ^0.1.2
+
+dev_dependencies:
+  test: ^1.25.0
