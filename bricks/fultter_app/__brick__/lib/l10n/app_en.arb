@@ -1,6 +1,10 @@
 {
   "@@locale": "en",
   "homeReady": "Ready.",
+  "authLoading": "Checking session",
+  "authRequired": "Authentication is required to continue.",
+  "authSessionExpired": "Your session expired. Authenticate again to continue.",
+  "publicReady": "Public route ready.",
   "themeMenuTooltip": "Choose theme",
   "themeSystem": "System theme",
   "themeLight": "Light theme",

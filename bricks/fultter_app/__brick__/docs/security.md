@@ -10,6 +10,7 @@ Included:
 - HTTPS guardrail for `API_BASE_URL` in staging and production
 - debug/release logging separation through config
 - timeouts for network requests
+- backend-neutral credential lifecycle and session route guards
 
 Not included by default:
 
