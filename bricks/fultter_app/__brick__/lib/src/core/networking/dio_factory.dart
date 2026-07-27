@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:logging/logging.dart';
 
@@ -18,12 +16,11 @@ Dio createDio(NetworkConfig config, Observability observability) {
   final dio = Dio(
     BaseOptions(
       baseUrl: config.baseUrl,
-      connectTimeout: const Duration(seconds: 15),
-      receiveTimeout: const Duration(seconds: 30),
-      sendTimeout: const Duration(seconds: 30),
-      headers: {
-        HttpHeaders.acceptHeader: 'application/json',
-      },
+      connectTimeout: config.connectTimeout,
+      receiveTimeout: config.receiveTimeout,
+      sendTimeout: config.sendTimeout,
+      transformTimeout: config.transformTimeout,
+      headers: config.defaultHeaders,
     ),
   );
 
@@ -51,8 +48,6 @@ Dio createDio(NetworkConfig config, Observability observability) {
         _log.warning(
           'HTTP error ${error.requestOptions.method} '
           '$safeUri: ${Redactor.redact(error.message)}',
-          error,
-          error.stackTrace,
         );
         handler.next(error);
       },

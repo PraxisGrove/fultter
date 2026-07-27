@@ -38,6 +38,8 @@ including a Sentry DSN when enabled, must not be described or treated as secret.
 
 Network bodies are not logged. `ENABLE_NETWORK_LOGS` controls redacted request
 metadata only and is always overridden to `false` for `APP_ENV=prod`.
+`ALLOW_INSECURE_HTTP_FOR_DEBUG` is honored only for `APP_ENV=dev`; staging and
+production always require an HTTPS `API_BASE_URL`.
 
 ## Platform Flavors
 

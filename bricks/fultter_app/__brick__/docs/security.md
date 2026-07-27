@@ -7,7 +7,7 @@ Included:
 - secure storage abstraction backed by `flutter_secure_storage`
 - log redaction
 - network header redaction
-- HTTPS guardrail for `API_BASE_URL`
+- HTTPS guardrail for `API_BASE_URL` in staging and production
 - debug/release logging separation through config
 - timeouts for network requests
 
@@ -40,3 +40,7 @@ Extend `Redactor` if your backend uses additional sensitive field names.
 Network request and response bodies are never logged by the generated client.
 Network metadata logs can be enabled for dev or staging, but are forced off in
 production even if `ENABLE_NETWORK_LOGS` is set to `true`.
+
+Insecure HTTP is accepted only when `APP_ENV=dev` and
+`ALLOW_INSECURE_HTTP_FOR_DEBUG=true`. Staging and production reject insecure
+base URLs even if that flag is accidentally enabled.

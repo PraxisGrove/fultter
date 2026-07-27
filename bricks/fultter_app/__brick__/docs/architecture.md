@@ -13,6 +13,7 @@ lib/
       router.dart
     core/
       config/
+      failures/
       logging/
       networking/
       observability/
@@ -26,8 +27,15 @@ lib/
 - `core`: shared infrastructure used across features.
 - `features`: product-specific code.
 
-Business features should not import Sentry, Dio, or secure storage directly unless there is a clear reason. Prefer depending on small interfaces exposed from `core`.
+Domain and presentation public contracts must not import Flutter, Dio, secure
+storage implementations, Sentry, DTOs, or provider SDKs. Domain code may depend
+on the backend-neutral failure contract. Keep Dio, DTO conversion, and response
+mapping in data or infrastructure implementations.
 
 ## Dependency Injection
 
 Riverpod is used for dependency wiring. Infrastructure services are provided from `lib/src/app/providers.dart`, which makes them easy to override in tests.
+
+`apiClientProvider` and `failureMapperProvider` expose replaceable interfaces.
+Override providers at the nearest `ProviderScope`; do not add a mutable global
+service locator.
