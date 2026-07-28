@@ -11,6 +11,9 @@ Generates a Flutter mobile app skeleton with infrastructure defaults:
 - dev/staging/prod configuration
 - CI, release build, integration test, and manual deployment workflow templates
 
+The supported toolchain is Flutter 3.44.x stable with its bundled Dart 3.12.x.
+Generated workflows pin Flutter 3.44.8.
+
 ## Generate
 
 ```sh

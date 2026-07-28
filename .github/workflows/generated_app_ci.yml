@@ -1,0 +1,105 @@
+name: Generated App Quality Gate
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  FLUTTER_VERSION: 3.44.8
+  MASON_VERSION: 0.1.2
+  GENERATED_APP: ${{ github.workspace }}/build/quality_gate_app
+
+jobs:
+  quality-and-android:
+    name: Generate, quality, removal, Android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter ${{ env.FLUTTER_VERSION }}
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Install generation dependencies
+        run: |
+          dart pub global activate mason_cli "$MASON_VERSION"
+          cd bricks/fultter_app/hooks
+          dart pub get
+
+      - name: Test generation hook
+        working-directory: bricks/fultter_app/hooks
+        run: dart test
+
+      - name: Generate clean integrations-off app
+        run: tool/generate_default_app.sh "$GENERATED_APP"
+
+      - name: Install generated dependencies
+        working-directory: ${{ env.GENERATED_APP }}
+        run: flutter pub get
+
+      - name: Check generated formatting
+        working-directory: ${{ env.GENERATED_APP }}
+        run: dart format --set-exit-if-changed .
+
+      - name: Analyze generated app
+        working-directory: ${{ env.GENERATED_APP }}
+        run: flutter analyze
+
+      - name: Test generated app
+        working-directory: ${{ env.GENERATED_APP }}
+        run: flutter test
+
+      - name: Build generated Android app
+        working-directory: ${{ env.GENERATED_APP }}
+        run: flutter build apk --debug --dart-define-from-file=config/dev.json
+
+      - name: Remove reference feature
+        run: dart run tool/remove_reference_feature.dart "$GENERATED_APP"
+
+      - name: Verify reference-free formatting
+        working-directory: ${{ env.GENERATED_APP }}
+        run: dart format --set-exit-if-changed .
+
+      - name: Analyze reference-free app
+        working-directory: ${{ env.GENERATED_APP }}
+        run: flutter analyze
+
+      - name: Test reference-free app
+        working-directory: ${{ env.GENERATED_APP }}
+        run: flutter test
+
+  ios:
+    name: Generate and build iOS
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter ${{ env.FLUTTER_VERSION }}
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Install Mason
+        run: dart pub global activate mason_cli "$MASON_VERSION"
+
+      - name: Generate clean integrations-off app
+        run: tool/generate_default_app.sh "$GENERATED_APP"
+
+      - name: Install generated dependencies
+        working-directory: ${{ env.GENERATED_APP }}
+        run: flutter pub get
+
+      - name: Build generated iOS app without signing
+        working-directory: ${{ env.GENERATED_APP }}
+        run: >-
+          flutter build ios --debug --no-codesign
+          --dart-define-from-file=config/dev.json

@@ -8,9 +8,9 @@ Mason bricks for starting Flutter mobile apps with logging, observability, basic
 
 ## Requirements
 
-- Flutter stable SDK
-- Dart SDK bundled with Flutter
-- Mason CLI
+- Flutter 3.44.x stable (CI pins 3.44.8)
+- Dart 3.12.x bundled with Flutter
+- Mason CLI 0.1.2
 
 Install Mason:
 
@@ -40,6 +40,33 @@ The brick generates app code first, then its post-generation hook runs `flutter 
 Generation validates `app_name`, `org_domain`, and `bundle_id` before invoking
 Flutter. See `bricks/fultter_app/README.md` for the accepted formats and the
 exact dev, staging, prod, analysis, and test commands printed after success.
+
+## Repository Quality Gate
+
+Every pull request generates the single supported default profile with Sentry
+disabled and without credentials, then runs dependency installation, formatting,
+analysis, all unit/widget tests, and an Android debug build. A separate macOS job
+generates the same profile and builds iOS without code signing. Each operation is
+a separate workflow step so failures identify the broken stage.
+
+The gate also removes the complete reference feature from a temporary generated
+app, replaces it with a neutral authenticated home, and reruns formatting,
+analysis, and the remaining tests. Run the same default generation locally with:
+
+```sh
+dart pub global activate mason_cli 0.1.2
+tool/generate_default_app.sh build/generated_app
+cd build/generated_app
+flutter pub get
+dart format --set-exit-if-changed .
+flutter analyze
+flutter test
+flutter build apk --debug --dart-define-from-file=config/dev.json
+```
+
+Flutter 3.44.x with its bundled Dart 3.12.x is the supported toolchain range.
+The pinned patch version is the release gate; changes to that pin require the
+full generated Android and iOS jobs to pass.
 
 ## Scope
 
