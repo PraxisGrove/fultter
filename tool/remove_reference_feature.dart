@@ -149,7 +149,7 @@ List<String> _findReferenceMentions(Directory root) {
   for (final relativeRoot in const ['lib', 'test']) {
     final directory = Directory('${root.path}/$relativeRoot');
     for (final entity in directory.listSync(recursive: true)) {
-      if (entity is! File) {
+      if (entity is! File || !entity.path.endsWith('.dart')) {
         continue;
       }
       final lines = entity.readAsLinesSync();
