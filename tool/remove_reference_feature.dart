@@ -229,14 +229,6 @@ void _updateGuidance(Directory root) {
         'Use these steps as the executable pattern. Replace `catalog` and the example\n'
         'type names below with product-neutral names appropriate to the feature.',
   });
-  _replaceInFile(File('${root.path}/lib/src/features/README.md'), {
-    'Use `features/reference` as the normative vertical-slice example and follow\n'
-            '`docs/recipes.md` for placement, dependency direction, routes, repository\n'
-            'replacement, and tests. Follow `docs/remove-reference-feature.md` when the\n'
-            'example is no longer needed.\n':
-        'Follow `docs/recipes.md` for placement, dependency direction, routes,\n'
-        'repository replacement, and tests.\n',
-  });
 }
 
 void _replaceInFile(File file, Map<String, String> replacements) {

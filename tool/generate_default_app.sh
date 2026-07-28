@@ -27,6 +27,21 @@ fi
 test -d "$output_dir/android"
 test -d "$output_dir/ios"
 test -f "$output_dir/.github/workflows/flutter_ci.yml"
+test -f "$output_dir/.github/workflows/ios_build.yml"
+test -f "$output_dir/.github/workflows/deploy_android.yml"
+
+for removed_path in \
+  .github/workflows/android_release.yml \
+  .github/workflows/deploy_ios.yml \
+  .github/workflows/integration_tests.yml \
+  docs/localization.md \
+  lib/src/features/README.md \
+  lib/src/features/reference/data/README.md; do
+  if [[ -e "$output_dir/$removed_path" ]]; then
+    echo "Generated output contains retired template file: $removed_path" >&2
+    exit 1
+  fi
+done
 
 if grep -REn 'sentry_flutter|SentryObservability|\{\{[^}]' \
   "$output_dir/pubspec.yaml" "$output_dir/lib"; then

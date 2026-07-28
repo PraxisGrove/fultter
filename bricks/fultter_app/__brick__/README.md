@@ -18,15 +18,19 @@ flutter test
 
 ## Documentation
 
+Start here:
+
 - [Project rules for humans and AI tools](AGENTS.md)
-- [Architecture](docs/architecture.md)
 - [Development recipes](docs/recipes.md)
-- [Remove the reference feature](docs/remove-reference-feature.md)
-- [External integration template](docs/external-integration.md)
-- [Configuration](docs/configuration.md)
-- [Localization](docs/localization.md)
+
+Read by scenario:
+
+- [Architecture](docs/architecture.md)
 - [Authentication and route guards](docs/authentication.md)
 - [Networking and failures](docs/networking.md)
+- [Configuration](docs/configuration.md)
 - [Observability](docs/observability.md)
 - [Security](docs/security.md)
 - [Release](docs/release.md)
+- [External integration template](docs/external-integration.md)
+- [Remove the reference feature](docs/remove-reference-feature.md)

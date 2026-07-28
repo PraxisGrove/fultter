@@ -76,8 +76,6 @@ The root rules and recipes describe the example while it exists. After removal:
   reference-feature paragraph. Keep the dependency-direction diagram.
 - In `docs/recipes.md`, replace the opening reference-feature sentence with
   "Use these steps as the executable pattern."
-- In `lib/src/features/README.md`, remove the reference-feature paragraph and
-  retain a link to `docs/recipes.md`.
 
 Keep this removal guide as evidence of the deleted example's boundary.
 

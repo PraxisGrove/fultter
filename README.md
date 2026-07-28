@@ -79,6 +79,6 @@ This template intentionally focuses on infrastructure:
 - basic security: redaction, secure storage, HTTPS guardrails
 - go_router
 - environment configuration with `--dart-define-from-file`
-- GitHub Actions for CI, integration tests, release builds, and manual deploy workflows
+- GitHub Actions for CI, an iOS release build, and Android internal-track deployment
 
 It does not generate concrete business features such as login, profile, orders, or payments.
