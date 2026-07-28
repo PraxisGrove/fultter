@@ -9,7 +9,7 @@ Generates a Flutter mobile app skeleton with infrastructure defaults:
 - routing with go_router
 - basic security with redaction and secure storage
 - dev/staging/prod configuration
-- CI, release build, integration test, and manual deployment workflow templates
+- CI, an iOS release build, and Android internal-track deployment workflows
 
 The supported toolchain is Flutter 3.44.x stable with its bundled Dart 3.12.x.
 Generated workflows pin Flutter 3.44.8.

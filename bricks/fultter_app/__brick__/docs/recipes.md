@@ -81,8 +81,10 @@ direction `presentation -> application -> domain <- data`.
 3. Run `flutter gen-l10n` and use `AppLocalizations.of(context)!` in widgets.
 4. Add a widget test that selects the locale through `localeProvider`, and
    retain the English fallback test for unsupported locales.
-5. Run format, analysis, and all tests. See `docs/localization.md` for the
-   fallback contract.
+5. Use `ref.read(localeProvider.notifier).setLocale(locale)` to select a locale.
+   Pass `null` to return to the device locale. Unsupported locales fall back to
+   English.
+6. Run format, analysis, and all tests.
 
 ## Add an external integration
 
